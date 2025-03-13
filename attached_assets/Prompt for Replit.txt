@@ -1,0 +1,44 @@
+Prompt Instruction for Replit’s Agent
+Project Title:
+Build a scalable MVP for an AI-powered content generation platform for Thai SMEs, inspired by trypencil.com.
+________________________________________
+Overview:
+Develop an MVP that serves as an AI-powered marketing and advertising content generation tool tailored for Thai SMEs. The product should capture the modern, clean look and intuitive user journey seen on trypencil.com, while also including localized features such as custom-branded subdomains for each business.
+________________________________________
+Key Requirements:
+1.	Website & Domain Hosting
+o	Custom Domain: Develop a responsive website hosted on a chosen custom domain.
+o	Modern Design: Emulate the clean, modern, and user-friendly interface of trypencil.com. Focus on clear navigation, engaging visuals, and a layout that highlights the core features.
+2.	User Authentication & Registration
+o	Secure Registration/Login: Implement robust user registration and login functionality using secure session management and best practices.
+o	User Experience: Ensure the registration and login pages follow a design and flow that feels as modern and intuitive as trypencil.com.
+3.	Branded Subdomain Creation
+o	Automated Subdomain Provisioning: On a new SME’s first login, automatically create a personalized subdomain (e.g., businessname.yourdomain.com).
+o	User Workflow: Design an onboarding process where users input necessary business details, and the system provisions their branded subdomain—similar to the user journey on platforms like Substack or Medium.
+4.	AI-Powered Content Generation
+o	Integration with AI API: Integrate an AI content generation API (e.g., leveraging models like GPT) to help users generate creative marketing and advertising content.
+o	Interactive UI: Provide a simple, clean interface for users to input prompts or parameters. The workflow should allow them to generate, review, and refine their content, echoing the process seen on trypencil.com.
+5.	Product Look, Feel & User Journey
+o	UI/UX Consistency: Ensure that the overall look and feel, as well as the step-by-step user journey, closely mimic trypencil.com. This includes intuitive navigation, modern aesthetics, and a seamless transition from registration to content creation.
+o	Onboarding and Guidance: Incorporate helpful onboarding screens, tooltips, or walkthroughs that guide users through the process of subdomain creation and content generation.
+6.	Scalability and Future Expansion
+o	Modular Codebase: Structure the project with a modular architecture to facilitate the addition of future features such as analytics, team collaboration, or enhanced customization.
+o	Database Setup: Start with a lightweight database (e.g., SQLite for the MVP) that can be scaled or migrated to a more robust solution (e.g., PostgreSQL or MongoDB) as the product grows.
+o	Error Handling & Logging: Implement comprehensive error handling and logging to simplify debugging and ensure smooth operation as the user base expands.
+7.	Deployment on Replit
+o	Replit’s Tools: Utilize Replit’s deployment tools to launch the MVP. Ensure that environment variables and configuration management are properly set up for a production-ready environment.
+o	Deployment Scripts: Provide scripts or instructions that make it easy to update and scale the deployment in the future.
+8.	Technical Stack Considerations
+o	Backend Options: Consider using Node.js with Express or Python with Flask/Django for backend development, based on familiarity and ease of integration with AI APIs.
+o	Frontend Framework: Use modern frontend frameworks like React or Vue.js (or even standard HTML/CSS/JavaScript) to achieve a responsive and dynamic interface.
+o	API Integration: Ensure smooth integration with the chosen AI API for content generation.
+9.	Documentation and Testing
+o	Code Documentation: Document the code and deployment process clearly to facilitate future development and scalability.
+o	Testing: Include unit tests and integration tests for critical functionalities such as user authentication, subdomain creation, and AI content generation.
+10.	Dual-Language Support
+•	Thai Default: The user interface should be primarily in Thai by default, ensuring local SME owners can easily navigate and use the platform.
+•	English Option: Provide a toggle or settings option for English. The layout and key elements should seamlessly adapt to both languages without breaking the design.
+•	Localization Best Practices: Use language files or a translation framework that can be expanded for future languages if needed. Ensure that any AI-generated content can also handle or incorporate Thai language nuances.
+________________________________________
+Summary:
+This prompt instructs the development of an MVP that mirrors the product feel of trypencil.com—modern, user-friendly, and AI-driven—while specifically targeting Thai SMEs. It covers website hosting, secure user authentication, automated branded subdomain creation, dual-language support (Thai default, English optional), and seamless AI-powered content generation, all built to scale on Replit. This comprehensive instruction should help Replit’s agent understand both the immediate MVP needs and the long-term vision of building an AI-powered marketing assistant tailored for Thai SMEs.
