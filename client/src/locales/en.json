@@ -1,0 +1,390 @@
+{
+  "nav": {
+    "home": "Home",
+    "features": "Features",
+    "pricing": "Pricing",
+    "examples": "Examples",
+    "login": "Login",
+    "signup": "Sign Up",
+    "dashboard": "Dashboard",
+    "profile": "Profile",
+    "contentGenerator": "Content Generator",
+    "logout": "Logout"
+  },
+  "home": {
+    "hero": {
+      "title1": "Create Marketing Content",
+      "title2": "with AI in a Few Clicks",
+      "description": "Smart content generation platform for Thai SMEs helping you produce compelling marketing and advertising content quickly and effortlessly",
+      "startFree": "Start Free Trial",
+      "watchDemo": "Watch Demo",
+      "noCard": "No credit card required, 7-day free trial",
+      "imageAlt": "AI content generation dashboard preview",
+      "playDemo": "Play demo"
+    },
+    "features": {
+      "overline": "Features",
+      "title": "Elevate Your Content Creation",
+      "description": "Powerful tools that help Thai SMEs produce high-quality content quickly",
+      "feature1": {
+        "title": "AI-Powered Content",
+        "description": "Generate effective marketing content, ads, and promotions with advanced AI"
+      },
+      "feature2": {
+        "title": "Personal Subdomain",
+        "description": "Get your own automatic subdomain (yourbusiness.domain.com) for your brand"
+      },
+      "feature3": {
+        "title": "100% Thai Language Support",
+        "description": "Designed specifically for Thai businesses with full Thai language support"
+      },
+      "feature4": {
+        "title": "Easy Editing & Customization",
+        "description": "Edit and customize generated content to match your brand's style and needs"
+      },
+      "feature5": {
+        "title": "Fast & Efficient",
+        "description": "Save time and resources by creating high-quality content in just minutes"
+      },
+      "feature6": {
+        "title": "Maximum Security",
+        "description": "High-level security systems to protect your business data and content"
+      }
+    },
+    "howItWorks": {
+      "overline": "How It Works",
+      "title": "Easy As 1-2-3",
+      "description": "Start creating effective marketing and advertising content quickly",
+      "step1": {
+        "title": "Sign Up & Create Subdomain",
+        "description": "Register and get your own automatic subdomain for your brand"
+      },
+      "step2": {
+        "title": "Enter Information & Requirements",
+        "description": "Specify your business details, target audience, and content requirements"
+      },
+      "step3": {
+        "title": "Preview & Use Content",
+        "description": "Review, edit, and use the content in your marketing immediately"
+      }
+    },
+    "demo": {
+      "title": "See AI Content Pro in Action",
+      "description": "Watch how to create marketing content with AI for Thai SMEs - easy, fast, and effective",
+      "feature1": {
+        "title": "Ready to Use Immediately",
+        "description": "No installation or setup required, use immediately via web browser"
+      },
+      "feature2": {
+        "title": "Various Content Formats",
+        "description": "Create social media posts, articles, ads, and marketing emails"
+      },
+      "feature3": {
+        "title": "Connects with All Platforms",
+        "description": "Use content with social media, websites, or any advertising campaign immediately"
+      },
+      "cta": "Try Free for 7 Days",
+      "toolTitle": "AI Content Generator Tool",
+      "optionsTitle": "Content Options",
+      "contentType": "Content Type",
+      "contentTypeOption": "Social Media Post",
+      "business": "Business/Industry",
+      "businessOption": "Restaurant",
+      "tone": "Tone",
+      "toneOption": "Friendly",
+      "length": "Length",
+      "lengthOption": "Short",
+      "details": "Additional Details (Promotion, Special Features, etc.)",
+      "detailsPlaceholder": "New Thai restaurant with 20% discount for customers this month",
+      "generateButton": "Generate Content",
+      "result": "Result:",
+      "sampleContent1": "Now Open! Authentic Thai cuisine at \"Baan Suk Jai\" ready to serve you delicious meals!",
+      "sampleContent2": "Special! 20% discount for all customers this month only!",
+      "sampleContent3": "Try our signature dishes in a warm, homey atmosphere. Open daily 10am-10pm.",
+      "sampleContent4": "Sukhumvit 55 (Thonglor)",
+      "sampleContent5": "#BaanSukJai #ThaiFood #NewOpening #SpecialPromotion",
+      "regenerateButton": "Regenerate",
+      "editButton": "Edit",
+      "copyButton": "Copy",
+      "downloadButton": "Download"
+    },
+    "pricing": {
+      "overline": "Pricing",
+      "title": "Plans That Fit Your Business",
+      "description": "Choose a plan that suits your needs and budget",
+      "getStarted": "Get Started",
+      "contactSales": "Contact Sales",
+      "recommended": "Recommended",
+      "starter": {
+        "title": "Starter Plan",
+        "subtitle": "Perfect for small businesses",
+        "price": "฿990",
+        "feature1": "50 content pieces per month",
+        "feature2": "1 subdomain",
+        "feature3": "Basic content types",
+        "feature4": "Email support"
+      },
+      "pro": {
+        "title": "Pro Plan",
+        "subtitle": "Perfect for growing businesses",
+        "price": "฿1,990",
+        "feature1": "150 content pieces per month",
+        "feature2": "3 subdomains",
+        "feature3": "Premium content types",
+        "feature4": "Phone support",
+        "feature5": "Content analytics"
+      },
+      "enterprise": {
+        "title": "Enterprise Plan",
+        "subtitle": "For larger businesses and brands",
+        "price": "฿4,990",
+        "feature1": "500 content pieces per month",
+        "feature2": "Unlimited subdomains",
+        "feature3": "All premium content types",
+        "feature4": "Dedicated account manager",
+        "feature5": "API integrations"
+      }
+    },
+    "cta": {
+      "title": "Ready to Elevate Your Marketing Content?",
+      "description": "Start using AI Content Pro today and see the difference AI can make for your business",
+      "startFree": "Start Free Trial",
+      "seeMore": "See More Examples",
+      "signupTitle": "Sign up for 25% Discount",
+      "signupDescription": "Sign up today and get an immediate 25% discount for annual payments",
+      "email": "Email",
+      "businessName": "Business Name",
+      "signupButton": "Sign Up for Discount"
+    }
+  },
+  "login": {
+    "title": "Login",
+    "subtitle": "Sign in to start creating AI-powered content",
+    "username": "Username",
+    "usernamePlaceholder": "Enter your username",
+    "password": "Password",
+    "passwordPlaceholder": "Enter your password",
+    "forgotPassword": "Forgot password?",
+    "submitButton": "Sign In",
+    "noAccount": "Don't have an account?",
+    "registerLink": "Register here",
+    "successTitle": "Login Successful",
+    "successMessage": "Welcome back!",
+    "errorTitle": "Login Failed",
+    "errorMessage": "Invalid username or password. Please try again."
+  },
+  "register": {
+    "title": "Register",
+    "subtitle": "Create an account to start generating AI content",
+    "username": "Username",
+    "usernamePlaceholder": "e.g., yourname",
+    "email": "Email",
+    "emailPlaceholder": "Your email address",
+    "businessName": "Business Name",
+    "businessNamePlaceholder": "Your business name",
+    "subdomain": "Subdomain",
+    "subdomainPlaceholder": "Your subdomain name",
+    "generateSubdomain": "Auto Generate",
+    "password": "Password",
+    "passwordPlaceholder": "Minimum 6 characters",
+    "confirmPassword": "Confirm Password",
+    "confirmPasswordPlaceholder": "Re-enter your password",
+    "preferredLanguage": "Preferred Language",
+    "thai": "Thai",
+    "english": "English",
+    "submitButton": "Register",
+    "haveAccount": "Already have an account?",
+    "loginLink": "Login here",
+    "successTitle": "Registration Successful",
+    "successMessage": "Your account has been created. Please sign in.",
+    "errorTitle": "Registration Failed",
+    "errorMessage": "An error occurred. Please try again."
+  },
+  "dashboard": {
+    "welcome": "Welcome, {{username}}",
+    "yourSubdomain": "Your subdomain:",
+    "loading": "Loading data...",
+    "createContent": "Create New Content",
+    "loadingContent": "Loading content...",
+    "noContent": "No Content Yet",
+    "noContentMessage": "You haven't created any content yet. Start creating your first content now!",
+    "createFirstContent": "Create First Content",
+    "noFavorites": "No Favorites Yet",
+    "noFavoritesMessage": "You haven't added any content to favorites yet",
+    "analyticsTitle": "Analytics",
+    "analyticsMessage": "Upgrade to Pro or Enterprise plan to view your content analytics",
+    "upgradeButton": "Upgrade Plan",
+    "stats": {
+      "content": "Total Content",
+      "contentDesc": "Number of content items created",
+      "subscription": "Current Plan",
+      "subscriptionDesc": "Your subscription status",
+      "activePlan": "Starter Plan (Trial)",
+      "quota": "Remaining Quota",
+      "quotaDesc": "Content items you can create this month"
+    },
+    "tabs": {
+      "recent": "Recent",
+      "favorites": "Favorites",
+      "analytics": "Analytics"
+    },
+    "actions": {
+      "edit": "Edit",
+      "view": "View"
+    }
+  },
+  "contentGenerator": {
+    "title": "Content Generator",
+    "optionsTitle": "Content Options",
+    "optionsDescription": "Configure options to generate content that meets your needs",
+    "contentType": "Content Type",
+    "selectContentType": "Select content type",
+    "contentTypes": {
+      "social": "Social Media Post",
+      "ad": "Advertisement",
+      "email": "Marketing Email",
+      "blog": "Blog Article",
+      "promo": "Promotion"
+    },
+    "businessType": "Business Type",
+    "selectBusinessType": "Select business type",
+    "businessTypes": {
+      "restaurant": "Restaurant",
+      "retail": "Retail Store",
+      "salon": "Beauty Salon",
+      "cafe": "Cafe",
+      "hotel": "Hotel",
+      "fitness": "Fitness Center",
+      "tech": "Technology",
+      "other": "Other"
+    },
+    "tone": "Tone",
+    "selectTone": "Select tone",
+    "tones": {
+      "friendly": "Friendly",
+      "professional": "Professional",
+      "casual": "Casual",
+      "formal": "Formal",
+      "enthusiastic": "Enthusiastic"
+    },
+    "length": "Length",
+    "selectLength": "Select length",
+    "lengths": {
+      "short": "Short",
+      "medium": "Medium",
+      "long": "Long"
+    },
+    "language": "Language",
+    "selectLanguage": "Select language",
+    "languages": {
+      "thai": "Thai",
+      "english": "English"
+    },
+    "details": "Additional Details",
+    "detailsPlaceholder": "Provide details about your business, promotions, or other important information you want included in the content...",
+    "generateButton": "Generate Content",
+    "generating": "Generating...",
+    "resultTitle": "Generated Content",
+    "resultDescription": "Here is the content generated based on your specifications",
+    "contentTitle": "Content Title",
+    "regenerateButton": "Regenerate",
+    "copyButton": "Copy",
+    "downloadButton": "Download",
+    "saveButton": "Save",
+    "noContent": "Ready to Generate Content",
+    "noContentDescription": "Set your options on the left and click 'Generate Content' to begin",
+    "generatingContent": "Generating Content...",
+    "generatingDescription": "Please wait while we create your content",
+    "tabs": {
+      "examples": "Examples",
+      "tips": "Tips",
+      "help": "Help"
+    },
+    "examples": {
+      "1": {
+        "title": "Social Media Post - Restaurant",
+        "content": "✨ Special promotion today! 15% off all our signature dishes\n\n🍽️ Come taste authentic Thai cuisine prepared by our professional chefs\n\n⏰ Open daily 11am-10pm\n\n📱 For reservations: 02-XXX-XXXX\n\n#ThaiFood #SpecialPromotion #MustTry"
+      },
+      "2": {
+        "title": "Advertisement - Beauty Salon",
+        "content": "✂️ New! Complete hair service packages at affordable prices\n\n💇‍♀️ Cut, Wash, Blow Dry starting at just ฿690\n💆‍♀️ Deep Hair Treatment 30% OFF - only ฿990\n🌟 Hair Coloring with Treatment starting at ฿1,590\n\nBook today for an additional 10% discount\nCall: 09X-XXX-XXXX\nOr book online: www.example.com"
+      },
+      "3": {
+        "title": "Marketing Email - Cafe",
+        "content": "Dear Valued Customer,\n\nThank you for being part of the [Cafe Name] family. We're excited to announce our new summer menu coming soon!\n\n🥤 Latest additions:\n- Mango Nam Dok Mai Smoothie\n- Jasmine Green Tea with Honey\n- Blueberry Cold Brew Coffee\n\nSpecial for you: Show this email to receive 20% off any new beverage!\n\nThis promotion is valid until April 30th only.\n\nBest regards,\n[Cafe Name] Team"
+      }
+    },
+    "tips": {
+      "title": "Content Creation Tips",
+      "tip1": "Provide specific details about your business for the best results",
+      "tip2": "Specify the goal of your content (e.g., increase sales, brand awareness) in the additional details",
+      "tip3": "Choose a tone that matches your brand and target audience",
+      "tip4": "After generating content, always review and customize it to fit your brand perfectly",
+      "tip5": "Experiment with different options to see what works best for your business"
+    },
+    "help": {
+      "title": "Frequently Asked Questions",
+      "question1": "Can I edit the generated content?",
+      "answer1": "Yes, you can copy the generated content and edit it in another program, or click the 'Edit' button to edit it in our tool",
+      "question2": "How many content pieces can I generate per month?",
+      "answer2": "The number of content pieces you can generate depends on your subscription plan. The Starter plan includes 50 content pieces per month",
+      "question3": "Can I switch between Thai and English?",
+      "answer3": "Yes, you can choose whether to generate content in Thai or English in the 'Language' option"
+    },
+    "successTitle": "Content Generated Successfully",
+    "successMessage": "Your content has been generated",
+    "errorTitle": "Error Occurred",
+    "errorMessage": "Unable to generate content. Please try again",
+    "saveSuccessTitle": "Save Successful",
+    "saveSuccessMessage": "Your content has been saved",
+    "saveErrorTitle": "Save Failed",
+    "saveErrorMessage": "Unable to save content. Please try again",
+    "copiedTitle": "Copied",
+    "copiedMessage": "Content copied to clipboard"
+  },
+  "footer": {
+    "tagline": "Smart content generation platform for Thai SMEs",
+    "copyright": "All rights reserved.",
+    "aboutUs": {
+      "title": "About Us",
+      "team": "Team",
+      "about": "About Company",
+      "news": "News",
+      "careers": "Careers"
+    },
+    "support": {
+      "title": "Support",
+      "help": "Help Center",
+      "faq": "FAQ",
+      "contact": "Contact Us",
+      "guides": "Guides"
+    },
+    "services": {
+      "title": "Services",
+      "contentCreation": "Content Creation",
+      "subdomains": "Subdomains",
+      "analytics": "Analytics",
+      "api": "API"
+    },
+    "legal": {
+      "title": "Legal",
+      "privacy": "Privacy Policy",
+      "terms": "Terms of Use",
+      "cookies": "Cookie Policy"
+    }
+  },
+  "common": {
+    "loading": "Loading...",
+    "save": "Save",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "edit": "Edit",
+    "view": "View",
+    "success": "Success",
+    "error": "Error",
+    "warning": "Warning",
+    "info": "Information",
+    "confirm": "Confirm",
+    "close": "Close"
+  }
+}
