@@ -3,6 +3,14 @@ import { Request, Response, NextFunction } from 'express';
 import { IStorage } from '../storage';
 import { InsertUser, LoginUser } from '@shared/schema';
 
+// Extend Express Request to include our session properties
+declare module 'express-session' {
+  interface SessionData {
+    userId?: number;
+    username?: string;
+  }
+}
+
 /**
  * Hash a password using SHA-256
  * @param password Plain text password
