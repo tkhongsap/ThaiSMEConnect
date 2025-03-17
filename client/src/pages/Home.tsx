@@ -42,7 +42,7 @@ const Home: React.FC = () => {
                 <div className="relative block w-full bg-white rounded-lg overflow-hidden">
                   <img 
                     className="w-full" 
-                    src="https://images.unsplash.com/photo-1551434678-e076c223a692?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" 
+                    src="/images/image-001.jpg" 
                     alt={t('home.hero.imageAlt')} 
                   />
                   <div className="absolute inset-0 flex items-center justify-center">
