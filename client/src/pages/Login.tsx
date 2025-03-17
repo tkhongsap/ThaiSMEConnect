@@ -109,11 +109,22 @@ const Login: React.FC = () => {
       oauthLoginMutation.mutate(googleUser);
     } catch (error) {
       console.error("Google sign-in error:", error);
+      
+      // Handle specific Firebase errors
+      let errorMessage = '';
+      if (error instanceof Error) {
+        if (error.message.includes('auth/configuration-not-found')) {
+          errorMessage = 'Google sign-in is not properly configured in Firebase. Please contact the administrator.';
+        } else {
+          errorMessage = error.message;
+        }
+      } else {
+        errorMessage = t('login.googleSignInError');
+      }
+      
       toast({
         title: t('login.errorTitle'),
-        description: error instanceof Error 
-          ? error.message 
-          : t('login.googleSignInError'),
+        description: errorMessage,
         variant: 'destructive',
       });
     }
@@ -126,11 +137,22 @@ const Login: React.FC = () => {
       oauthLoginMutation.mutate(facebookUser);
     } catch (error) {
       console.error("Facebook sign-in error:", error);
+      
+      // Handle specific Firebase errors
+      let errorMessage = '';
+      if (error instanceof Error) {
+        if (error.message.includes('auth/configuration-not-found')) {
+          errorMessage = 'Facebook sign-in is not properly configured in Firebase. Please contact the administrator.';
+        } else {
+          errorMessage = error.message;
+        }
+      } else {
+        errorMessage = t('login.facebookSignInError');
+      }
+      
       toast({
         title: t('login.errorTitle'),
-        description: error instanceof Error 
-          ? error.message 
-          : t('login.facebookSignInError'),
+        description: errorMessage,
         variant: 'destructive',
       });
     }

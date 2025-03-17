@@ -62,7 +62,17 @@ export async function registerRoutes(app: Express): Promise<Server> {
       res.json({ success: true, message: "OAuth login successful" });
     } catch (error) {
       console.error("OAuth login error:", error);
-      res.status(401).json({ message: error.message || "OAuth login failed" });
+      
+      // More detailed error information for better debugging
+      if (error instanceof Error) {
+        res.status(401).json({ 
+          message: "OAuth login failed", 
+          error: error.message,
+          details: "This may be due to incorrect Firebase configuration or authentication setup."
+        });
+      } else {
+        res.status(401).json({ message: "OAuth login failed" });
+      }
     }
   });
   
