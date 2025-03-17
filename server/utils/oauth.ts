@@ -75,7 +75,7 @@ async function getUserByProvider(
 ): Promise<User | undefined> {
   // This is a custom query that needs to be implemented in the storage
   const users = await storage.getAllUsers();
-  return users.find(u => 
+  return users.find((u: User) => 
     u.authProvider === provider && u.providerId === providerId
   );
 }

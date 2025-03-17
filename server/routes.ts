@@ -10,7 +10,8 @@ import {
   logoutUser,
   requireAuth 
 } from "./utils/auth";
-import { ContentGeneration, contentGenerationSchema } from "@shared/schema";
+import { processOAuthLogin } from "./utils/oauth";
+import { ContentGeneration, contentGenerationSchema, oauthUserSchema } from "@shared/schema";
 import { z } from "zod";
 
 export async function registerRoutes(app: Express): Promise<Server> {
@@ -43,6 +44,60 @@ export async function registerRoutes(app: Express): Promise<Server> {
   app.post("/api/auth/logout", (req, res) => {
     logoutUser(req);
     res.json({ success: true, message: "Logged out successfully" });
+  });
+  
+  // OAuth login route
+  app.post("/api/auth/oauth", async (req, res) => {
+    try {
+      // Validate OAuth data
+      const oauthData = oauthUserSchema.parse(req.body);
+      
+      // Process OAuth login/signup
+      const session = await processOAuthLogin(oauthData, storage);
+      
+      // Set user session
+      req.session.userId = session.userId;
+      req.session.username = session.username;
+      
+      res.json({ success: true, message: "OAuth login successful" });
+    } catch (error) {
+      console.error("OAuth login error:", error);
+      res.status(401).json({ message: error.message || "OAuth login failed" });
+    }
+  });
+  
+  // Test account login route (for development only)
+  app.post("/api/auth/test-login", async (req, res) => {
+    try {
+      // Check if this is a test account login
+      if (req.body.username === "test" && req.body.password === "test") {
+        // Look up the test user or create it if it doesn't exist
+        let testUser = await storage.getUserByUsername("test");
+        
+        if (!testUser) {
+          // Create the test user
+          testUser = await storage.createUser({
+            username: "test",
+            password: "test",  // This should be hashed in production
+            email: "test@example.com",
+            businessName: "Test Business",
+            subdomain: "test",
+            preferredLanguage: "th",
+          });
+        }
+        
+        // Set user session
+        req.session.userId = testUser.id;
+        req.session.username = testUser.username;
+        
+        return res.json({ success: true, message: "Test login successful" });
+      }
+      
+      res.status(401).json({ message: "Invalid test credentials" });
+    } catch (error) {
+      console.error("Test login error:", error);
+      res.status(500).json({ message: error.message || "Test login failed" });
+    }
   });
 
   app.get("/api/auth/me", requireAuth, async (req, res) => {

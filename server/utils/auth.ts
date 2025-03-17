@@ -45,14 +45,20 @@ export async function registerUser(userData: InsertUser, storage: IStorage) {
     throw new Error('Subdomain already exists');
   }
 
-  // Hash the password
-  const hashedPassword = hashPassword(userData.password);
+  // Hash the password if it exists (for regular users)
+  let userToCreate: InsertUser = { ...userData };
+  
+  if (userData.password) {
+    // Regular user with password
+    const hashedPassword = hashPassword(userData.password);
+    userToCreate.password = hashedPassword;
+  } else if (!userData.authProvider) {
+    // Not an OAuth user but no password provided
+    throw new Error('Password is required for non-OAuth registration');
+  }
 
-  // Create the user with hashed password
-  const user = await storage.createUser({
-    ...userData,
-    password: hashedPassword,
-  });
+  // Create the user
+  const user = await storage.createUser(userToCreate);
 
   // Return user data without the password
   const { password, ...userWithoutPassword } = user;

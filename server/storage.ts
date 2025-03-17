@@ -9,6 +9,7 @@ export interface IStorage {
   getUserByUsername(username: string): Promise<User | undefined>;
   getUserByEmail(email: string): Promise<User | undefined>;
   getUserBySubdomain(subdomain: string): Promise<User | undefined>;
+  getAllUsers(): Promise<User[]>;  // New method to get all users
   createUser(user: InsertUser): Promise<User>;
   
   // Content operations
@@ -54,11 +55,32 @@ export class MemStorage implements IStorage {
       (user) => user.subdomain.toLowerCase() === subdomain.toLowerCase(),
     );
   }
+  
+  async getAllUsers(): Promise<User[]> {
+    return Array.from(this.users.values());
+  }
 
   async createUser(insertUser: InsertUser): Promise<User> {
     const id = this.userIdCounter++;
     const createdAt = new Date();
-    const user: User = { ...insertUser, id, createdAt, isVerified: false };
+    
+    // Create user with all required fields and null values for optional fields
+    const user: User = {
+      id,
+      createdAt,
+      isVerified: false,
+      username: insertUser.username,
+      email: insertUser.email,
+      businessName: insertUser.businessName,
+      subdomain: insertUser.subdomain,
+      password: insertUser.password || null,
+      preferredLanguage: insertUser.preferredLanguage || null,
+      authProvider: insertUser.authProvider || null,
+      providerId: insertUser.providerId || null,
+      displayName: insertUser.displayName || null,
+      photoURL: insertUser.photoURL || null,
+    };
+    
     this.users.set(id, user);
     return user;
   }
@@ -71,13 +93,29 @@ export class MemStorage implements IStorage {
   async getContentItemsByUserId(userId: number): Promise<ContentItem[]> {
     return Array.from(this.contentItems.values())
       .filter((item) => item.userId === userId)
-      .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
+      .sort((a, b) => {
+        const dateA = a.createdAt ? new Date(a.createdAt).getTime() : 0;
+        const dateB = b.createdAt ? new Date(b.createdAt).getTime() : 0;
+        return dateB - dateA;
+      });
   }
 
   async createContentItem(item: InsertContentItem): Promise<ContentItem> {
     const id = this.contentIdCounter++;
     const createdAt = new Date();
-    const contentItem: ContentItem = { ...item, id, createdAt };
+
+    // Create content item with all required fields and null values for optional fields
+    const contentItem: ContentItem = {
+      id,
+      createdAt,
+      userId: item.userId,
+      title: item.title,
+      contentType: item.contentType,
+      content: item.content,
+      prompt: item.prompt,
+      language: item.language || null,
+    };
+
     this.contentItems.set(id, contentItem);
     return contentItem;
   }
