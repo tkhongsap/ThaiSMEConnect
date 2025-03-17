@@ -1,0 +1,50 @@
+<specs>
+We are building an authentication system for SME Digital Leap (V1) that allows users to sign up and log in using social media accounts (Google & Facebook). Additionally, we need a test account with predefined credentials (username: test, password: test) for quick access during development.
+
+The system should be deployed on Replit and integrate OAuth authentication securely while providing a simple user interface for login options.
+</specs>
+
+<your_task>
+1. **Set up OAuth Authentication**
+   - Configure Google and Facebook OAuth credentials.
+   - Use Firebase Authentication (recommended) or OAuth2 via Passport.js (Node.js) for handling sign-ins.
+
+2. **Develop Backend API**
+   - Create authentication endpoints for:
+     - Sign-up/Login with Google
+     - Sign-up/Login with Facebook
+     - Sign-in using the test account
+   - Issue JWT tokens for authenticated users.
+   - Implement session management.
+
+3. **Implement Frontend Login Page**
+   - Provide UI buttons for:
+     - Sign in with Google
+     - Sign in with Facebook
+     - Sign in using the test account
+   - Redirect users after successful authentication.
+
+4. **Test Account Setup**
+   - Hardcode a test user in the database or backend logic:
+     ```json
+     {
+       "username": "test",
+       "password": "test"
+     }
+     ```
+   - Ensure this test user bypasses OAuth authentication.
+
+5. **Deployment & Security**
+   - Deploy the authentication system on Replit.
+   - Secure OAuth credentials using Replit's **Secrets Manager**.
+   - Ensure proper session handling and error logging.
+
+</your_task>
+
+<rules>
+- OAuth credentials must be stored securely in environment variables.
+- Authentication flows should be tested in a secure development environment before production.
+- The test account should only be available in the development environment.
+- Ensure proper error handling and logging for debugging.
+- The UI should be simple and user-friendly, guiding users through login options.
+</rules>
