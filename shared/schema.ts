@@ -5,13 +5,18 @@ import { z } from "zod";
 export const users = pgTable("users", {
   id: serial("id").primaryKey(),
   username: text("username").notNull().unique(),
-  password: text("password").notNull(),
+  password: text("password"),  // Make password optional for OAuth users
   email: text("email").notNull().unique(),
   businessName: text("business_name").notNull(),
   subdomain: text("subdomain").notNull().unique(),
   createdAt: timestamp("created_at").defaultNow(),
   isVerified: boolean("is_verified").default(false),
   preferredLanguage: text("preferred_language").default("th"),
+  // OAuth related fields
+  authProvider: text("auth_provider"), // 'google', 'facebook', or null for regular auth
+  providerId: text("provider_id"),     // Provider-specific ID
+  displayName: text("display_name"),   // Display name from OAuth provider
+  photoURL: text("photo_url"),         // Profile photo URL from OAuth provider
 });
 
 export const contentItems = pgTable("content_items", {
@@ -32,11 +37,24 @@ export const insertUserSchema = createInsertSchema(users).pick({
   businessName: true,
   subdomain: true,
   preferredLanguage: true,
+  authProvider: true,
+  providerId: true,
+  displayName: true,
+  photoURL: true,
 });
 
 export const loginUserSchema = z.object({
   username: z.string().min(3, "Username must be at least 3 characters"),
   password: z.string().min(6, "Password must be at least 6 characters"),
+});
+
+// Schema for OAuth login data
+export const oauthUserSchema = z.object({
+  email: z.string().email("Invalid email address"),
+  displayName: z.string().optional(),
+  authProvider: z.enum(["google", "facebook"]),
+  providerId: z.string(),
+  photoURL: z.string().optional(),
 });
 
 export const insertContentSchema = createInsertSchema(contentItems).pick({
@@ -60,6 +78,7 @@ export const contentGenerationSchema = z.object({
 export type User = typeof users.$inferSelect;
 export type InsertUser = z.infer<typeof insertUserSchema>;
 export type LoginUser = z.infer<typeof loginUserSchema>;
+export type OAuthUser = z.infer<typeof oauthUserSchema>;
 export type ContentItem = typeof contentItems.$inferSelect;
 export type InsertContentItem = z.infer<typeof insertContentSchema>;
 export type ContentGeneration = z.infer<typeof contentGenerationSchema>;
