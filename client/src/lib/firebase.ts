@@ -31,24 +31,38 @@ const facebookProvider = new FacebookAuthProvider();
 /**
  * Detects if the current browser is likely an in-app browser
  * This helps identify environments that might have issues with Google auth
+ * @returns Object with detection result and browser name if detected
  */
-function isInAppBrowser(): boolean {
+function detectInAppBrowser(): { isInApp: boolean; browserName?: string } {
   const userAgent = navigator.userAgent || '';
   
-  // Common in-app browser indicators
-  const inAppBrowserKeywords = [
-    'FB_IAB', 'FBAN', 'FBAV',  // Facebook
-    'Instagram',
-    'Line',                    // LINE app
-    'KAKAOTALK',               // KakaoTalk
-    'WhatsApp',
-    'WeChat',
-    'MicroMessenger'           // WeChat's browser identifier
+  // Common in-app browser indicators with friendly names
+  const inAppBrowsers = [
+    { keyword: 'FB_IAB', name: 'Facebook' },
+    { keyword: 'FBAN', name: 'Facebook' },
+    { keyword: 'FBAV', name: 'Facebook' },
+    { keyword: 'Instagram', name: 'Instagram' },
+    { keyword: 'Line', name: 'LINE' },
+    { keyword: 'KAKAOTALK', name: 'KakaoTalk' },
+    { keyword: 'WhatsApp', name: 'WhatsApp' },
+    { keyword: 'WeChat', name: 'WeChat' },
+    { keyword: 'MicroMessenger', name: 'WeChat' }
   ];
   
-  return inAppBrowserKeywords.some(keyword => 
-    userAgent.includes(keyword)
-  );
+  for (const browser of inAppBrowsers) {
+    if (userAgent.includes(browser.keyword)) {
+      return { isInApp: true, browserName: browser.name };
+    }
+  }
+  
+  return { isInApp: false };
+}
+
+/**
+ * Create a shareable URL for the current page that can be opened in an external browser
+ */
+export function getExternalBrowserUrl(): string {
+  return window.location.href;
 }
 
 export async function signInWithGoogle(): Promise<OAuthUser> {
@@ -59,12 +73,17 @@ export async function signInWithGoogle(): Promise<OAuthUser> {
       throw new Error("Firebase configuration missing. Please configure Firebase in the environment variables.");
     }
     
-    // Warn about in-app browsers that might have issues
-    if (isInAppBrowser()) {
-      console.warn("Detected in-app browser which may not support Google authentication");
+    // Check for in-app browsers
+    const browserInfo = detectInAppBrowser();
+    if (browserInfo.isInApp) {
+      console.warn(`Detected ${browserInfo.browserName} in-app browser which does not support Google authentication`);
+      
+      const appName = browserInfo.browserName || "social media app";
+      const url = getExternalBrowserUrl();
+      
       throw new Error(
-        "Google Sign-In may not work in in-app browsers like LINE, Facebook, or Instagram browsers. " +
-        "Please open this site in a standard web browser like Chrome or Safari."
+        `Google Sign-In is blocked by Google in the ${appName} browser due to security policies. ` +
+        `Please copy this URL and open it in Chrome or Safari: ${url}`
       );
     }
     
@@ -102,12 +121,17 @@ export async function signInWithFacebook(): Promise<OAuthUser> {
       throw new Error("Firebase configuration missing. Please configure Firebase in the environment variables.");
     }
     
-    // Warn about in-app browsers that might have issues
-    if (isInAppBrowser()) {
-      console.warn("Detected in-app browser which may not support Facebook authentication");
+    // Check for in-app browsers
+    const browserInfo = detectInAppBrowser();
+    if (browserInfo.isInApp) {
+      console.warn(`Detected ${browserInfo.browserName} in-app browser which does not support Facebook authentication`);
+      
+      const appName = browserInfo.browserName || "social media app";
+      const url = getExternalBrowserUrl();
+      
       throw new Error(
-        "Facebook Sign-In may not work in in-app browsers like LINE, Facebook, or Instagram browsers. " +
-        "Please open this site in a standard web browser like Chrome or Safari."
+        `Facebook Sign-In is blocked by Facebook in the ${appName} browser due to security policies. ` +
+        `Please copy this URL and open it in Chrome or Safari: ${url}`
       );
     }
     

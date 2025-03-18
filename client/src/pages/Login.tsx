@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useLocation } from 'wouter';
 import { useForm } from 'react-hook-form';
@@ -8,7 +8,7 @@ import { apiRequest } from '@/lib/queryClient';
 import { LoginUser, loginUserSchema } from '@shared/schema';
 import { Link } from 'wouter';
 import { useToast } from '@/hooks/use-toast';
-import { signInWithGoogle, signInWithFacebook } from '@/lib/firebase';
+import { signInWithGoogle, signInWithFacebook, getExternalBrowserUrl } from '@/lib/firebase';
 import {
   Form,
   FormControl,
@@ -21,12 +21,73 @@ import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Separator } from '@/components/ui/separator';
-import { FaGoogle, FaFacebook } from 'react-icons/fa';
+import { FaGoogle, FaFacebook, FaExternalLinkAlt, FaCopy } from 'react-icons/fa';
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 
 const Login: React.FC = () => {
   const { t } = useTranslation();
   const [, setLocation] = useLocation();
   const { toast } = useToast();
+  const [inAppBrowserInfo, setInAppBrowserInfo] = useState<{ detected: boolean; browserName?: string }>({ detected: false });
+  const [showCopiedMessage, setShowCopiedMessage] = useState(false);
+  
+  // Check for in-app browser on component mount
+  React.useEffect(() => {
+    try {
+      // We'll try to access the navigator user agent
+      const userAgent = navigator.userAgent || '';
+      
+      // Common in-app browser indicators with friendly names
+      const inAppBrowsers = [
+        { keyword: 'FB_IAB', name: 'Facebook' },
+        { keyword: 'FBAN', name: 'Facebook' },
+        { keyword: 'FBAV', name: 'Facebook' },
+        { keyword: 'Instagram', name: 'Instagram' },
+        { keyword: 'Line', name: 'LINE' },
+        { keyword: 'KAKAOTALK', name: 'KakaoTalk' },
+        { keyword: 'WhatsApp', name: 'WhatsApp' },
+        { keyword: 'WeChat', name: 'WeChat' },
+        { keyword: 'MicroMessenger', name: 'WeChat' }
+      ];
+      
+      for (const browser of inAppBrowsers) {
+        if (userAgent.includes(browser.keyword)) {
+          setInAppBrowserInfo({ 
+            detected: true, 
+            browserName: browser.name 
+          });
+          break;
+        }
+      }
+    } catch (e) {
+      console.error("Error checking browser type:", e);
+    }
+  }, []);
+  
+  // Function to copy the URL to clipboard
+  const copyUrlToClipboard = () => {
+    try {
+      navigator.clipboard.writeText(window.location.href);
+      setShowCopiedMessage(true);
+      
+      // Hide the "Copied!" message after 3 seconds
+      setTimeout(() => {
+        setShowCopiedMessage(false);
+      }, 3000);
+      
+      toast({
+        title: "URL Copied",
+        description: "URL copied to clipboard. Open your browser and paste it there.",
+      });
+    } catch (e) {
+      console.error("Failed to copy URL:", e);
+      toast({
+        title: "Copy Failed",
+        description: "Please copy the URL manually from the address bar.",
+        variant: "destructive"
+      });
+    }
+  };
 
   const form = useForm<LoginUser>({
     resolver: zodResolver(loginUserSchema),
@@ -174,6 +235,42 @@ const Login: React.FC = () => {
             {t('login.subtitle')}
           </CardDescription>
         </CardHeader>
+        
+        {/* In-app browser warning alert */}
+        {inAppBrowserInfo.detected && (
+          <div className="px-6 pb-2">
+            <Alert variant="warning" className="bg-amber-50 border-amber-200">
+              <AlertTitle className="text-amber-800 flex items-center gap-2">
+                <FaExternalLinkAlt className="h-4 w-4" /> 
+                {inAppBrowserInfo.browserName} Browser Detected
+              </AlertTitle>
+              <AlertDescription className="text-amber-700">
+                <p className="mb-3">
+                  Social login (Google/Facebook) does not work in the {inAppBrowserInfo.browserName} browser 
+                  due to security policies. Please use one of these options:
+                </p>
+                <div className="space-y-3">
+                  <Button 
+                    variant="outline" 
+                    className="w-full bg-white border-amber-300 text-amber-700 hover:bg-amber-50"
+                    onClick={copyUrlToClipboard}
+                  >
+                    <FaCopy className="mr-2 h-4 w-4" />
+                    {showCopiedMessage ? "Copied!" : "Copy URL to clipboard"}
+                  </Button>
+                  <p className="text-xs">
+                    After copying, open Chrome or Safari and paste the URL.
+                  </p>
+                  <p className="text-xs">
+                    Alternatively, you can use username/password login below which works in all browsers.
+                  </p>
+                </div>
+              </AlertDescription>
+            </Alert>
+            <Separator className="my-6" />
+          </div>
+        )}
+        
         <CardContent>
           <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
@@ -241,7 +338,7 @@ const Login: React.FC = () => {
                   variant="outline"
                   className="w-full"
                   onClick={handleGoogleSignIn}
-                  disabled={oauthLoginMutation.isPending}
+                  disabled={oauthLoginMutation.isPending || inAppBrowserInfo.detected}
                 >
                   <FaGoogle className="mr-2 h-4 w-4" />
                   Google
@@ -250,7 +347,7 @@ const Login: React.FC = () => {
                   variant="outline"
                   className="w-full"
                   onClick={handleFacebookSignIn}
-                  disabled={oauthLoginMutation.isPending}
+                  disabled={oauthLoginMutation.isPending || inAppBrowserInfo.detected}
                 >
                   <FaFacebook className="mr-2 h-4 w-4" />
                   Facebook
