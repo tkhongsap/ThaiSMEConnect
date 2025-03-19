@@ -239,7 +239,7 @@ const Login: React.FC = () => {
         {/* In-app browser warning alert */}
         {inAppBrowserInfo.detected && (
           <div className="px-6 pb-2">
-            <Alert variant="warning" className="bg-amber-50 border-amber-200">
+            <Alert className="bg-amber-50 border-amber-200">
               <AlertTitle className="text-amber-800 flex items-center gap-2">
                 <FaExternalLinkAlt className="h-4 w-4" /> 
                 {inAppBrowserInfo.browserName} Browser Detected
@@ -304,10 +304,8 @@ const Login: React.FC = () => {
 
               <div className="flex items-center justify-between">
                 <div className="text-sm">
-                  <Link href="/forgot-password">
-                    <a className="font-medium text-primary hover:text-blue-600">
-                      {t('login.forgotPassword')}
-                    </a>
+                  <Link href="/forgot-password" className="font-medium text-primary hover:text-blue-600">
+                    {t('login.forgotPassword')}
                   </Link>
                 </div>
               </div>

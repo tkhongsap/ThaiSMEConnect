@@ -23,10 +23,8 @@ const Home: React.FC = () => {
               </p>
               <div className="mt-8 sm:max-w-lg sm:mx-auto sm:text-center lg:text-left lg:mx-0">
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                  <Link href="/login">
-                    <a className="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-primary hover:bg-blue-600 md:py-4 md:text-lg md:px-10">
-                      {t('home.hero.startFree')}
-                    </a>
+                  <Link href="/login" className="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-primary hover:bg-blue-600 md:py-4 md:text-lg md:px-10">
+                    {t('home.hero.startFree')}
                   </Link>
                   <a href="#demo" className="w-full flex items-center justify-center px-8 py-3 border border-gray-300 text-base font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 md:py-4 md:text-lg md:px-10">
                     {t('home.hero.watchDemo')}
@@ -308,10 +306,8 @@ const Home: React.FC = () => {
               </div>
               
               <div className="mt-8">
-                <Link href="/login">
-                  <a className="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-primary hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary">
-                    {t('home.demo.cta')}
-                  </a>
+                <Link href="/login" className="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-primary hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary">
+                  {t('home.demo.cta')}
                 </Link>
               </div>
             </div>
