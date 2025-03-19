@@ -158,20 +158,28 @@
     }
   },
   "login": {
-    "title": "Login",
+    "title": "Sign in",
     "subtitle": "Sign in to start creating AI-powered content",
     "username": "Username",
     "usernamePlaceholder": "Enter your username",
     "password": "Password",
     "passwordPlaceholder": "Enter your password",
     "forgotPassword": "Forgot password?",
-    "submitButton": "Sign In",
-    "noAccount": "Don't have an account?",
-    "registerLink": "Register here",
+    "submitButton": "Continue",
+    "orContinueWith": "Or",
+    "newUser": "New user?",
+    "createAccount": "Create an account",
+    "signInInfo": "By signing in, you agree to our Terms of Service and Privacy Policy",
     "successTitle": "Login Successful",
     "successMessage": "Welcome back!",
     "errorTitle": "Login Failed",
-    "errorMessage": "Invalid username or password. Please try again."
+    "errorMessage": "Invalid username or password. Please try again.",
+    "oauthSuccessMessage": "OAuth login successful!",
+    "oauthErrorMessage": "OAuth login failed. Please try again.",
+    "googleSignInError": "Google sign-in failed. Please try again.",
+    "facebookSignInError": "Facebook sign-in failed. Please try again.",
+    "testLoginSuccessMessage": "Test login successful!",
+    "testLoginErrorMessage": "Test login failed. Please try again."
   },
   "register": {
     "title": "Register",

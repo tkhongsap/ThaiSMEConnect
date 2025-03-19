@@ -1,5 +1,12 @@
 import { initializeApp } from "firebase/app";
-import { getAuth, GoogleAuthProvider, FacebookAuthProvider, signInWithPopup, UserCredential } from "firebase/auth";
+import { 
+  getAuth, 
+  GoogleAuthProvider, 
+  FacebookAuthProvider, 
+  OAuthProvider,
+  signInWithPopup, 
+  UserCredential 
+} from "firebase/auth";
 import { OAuthUser } from "@shared/schema";
 
 // Firebase configuration
@@ -23,6 +30,14 @@ googleProvider.setCustomParameters({ prompt: 'select_account' });
 
 // Facebook Provider
 const facebookProvider = new FacebookAuthProvider();
+
+// LINE Provider
+const lineProvider = new OAuthProvider('oidc.line');
+lineProvider.setCustomParameters({
+  prompt: 'consent',
+  // The LINE login channel ID needs to be set in Firebase Auth providers
+  client_id: import.meta.env.VITE_LINE_LOGIN_CHANNEL_ID
+});
 
 /**
  * Sign in with Google

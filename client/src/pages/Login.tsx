@@ -226,13 +226,16 @@ const Login: React.FC = () => {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
-      <Card className="w-full max-w-md">
-        <CardHeader>
-          <CardTitle className="text-center text-3xl font-extrabold text-gray-900">
+      <Card className="w-full max-w-md shadow-sm">
+        <CardHeader className="space-y-1">
+          <CardTitle className="text-2xl font-bold text-gray-900">
             {t('login.title')}
           </CardTitle>
-          <CardDescription className="text-center mt-2">
-            {t('login.subtitle')}
+          <CardDescription className="flex items-center">
+            <span>{t('login.newUser')}</span> 
+            <Link href="/login" className="ml-1 text-blue-600 hover:text-blue-700 hover:underline">
+              {t('login.createAccount')}
+            </Link>
           </CardDescription>
         </CardHeader>
         
@@ -273,29 +276,40 @@ const Login: React.FC = () => {
         
         <CardContent>
           <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-              <FormField
-                control={form.control}
-                name="username"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>{t('login.username')}</FormLabel>
-                    <FormControl>
-                      <Input placeholder={t('login.usernamePlaceholder')} {...field} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
+            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+              <div className="space-y-2">
+                <FormLabel className="text-base">Email address</FormLabel>
+                <FormField
+                  control={form.control}
+                  name="username"
+                  render={({ field }) => (
+                    <FormItem className="space-y-1">
+                      <FormControl>
+                        <Input 
+                          placeholder={t('login.usernamePlaceholder')} 
+                          {...field} 
+                          className="h-11 text-base"
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              </div>
               
               <FormField
                 control={form.control}
                 name="password"
                 render={({ field }) => (
-                  <FormItem>
+                  <FormItem className="space-y-1">
                     <FormLabel>{t('login.password')}</FormLabel>
                     <FormControl>
-                      <Input type="password" placeholder={t('login.passwordPlaceholder')} {...field} />
+                      <Input 
+                        type="password" 
+                        placeholder={t('login.passwordPlaceholder')} 
+                        {...field} 
+                        className="h-11 text-base"
+                      />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -304,7 +318,7 @@ const Login: React.FC = () => {
 
               <div className="flex items-center justify-between">
                 <div className="text-sm">
-                  <Link href="/forgot-password" className="font-medium text-primary hover:text-blue-600">
+                  <Link href="/forgot-password" className="text-blue-600 hover:text-blue-700 hover:underline">
                     {t('login.forgotPassword')}
                   </Link>
                 </div>
@@ -312,10 +326,10 @@ const Login: React.FC = () => {
 
               <Button
                 type="submit"
-                className="w-full"
+                className="w-full h-11 bg-blue-600 hover:bg-blue-700"
                 disabled={loginMutation.isPending}
               >
-                {loginMutation.isPending ? t('common.loading') : t('login.submitButton')}
+                {loginMutation.isPending ? t('common.loading') : "Continue"}
               </Button>
             </form>
             
@@ -331,25 +345,50 @@ const Login: React.FC = () => {
                 </div>
               </div>
 
-              <div className="mt-6 grid grid-cols-2 gap-4">
+              <div className="mt-6 space-y-3">
                 <Button
                   variant="outline"
-                  className="w-full"
+                  className="w-full border-gray-300 hover:bg-gray-50 justify-center"
                   onClick={handleGoogleSignIn}
                   disabled={oauthLoginMutation.isPending || inAppBrowserInfo.detected}
                 >
-                  <FaGoogle className="mr-2 h-4 w-4" />
-                  Google
+                  <FaGoogle className="mr-2 h-5 w-5 text-[#4285F4]" />
+                  <span>Continue with Google</span>
                 </Button>
                 <Button
                   variant="outline"
-                  className="w-full"
+                  className="w-full border-gray-300 hover:bg-gray-50 justify-center"
                   onClick={handleFacebookSignIn}
                   disabled={oauthLoginMutation.isPending || inAppBrowserInfo.detected}
                 >
-                  <FaFacebook className="mr-2 h-4 w-4" />
-                  Facebook
+                  <FaFacebook className="mr-2 h-5 w-5 text-[#1877F2]" />
+                  <span>Continue with Facebook</span>
                 </Button>
+                <Button
+                  variant="outline"
+                  className="w-full border-gray-300 hover:bg-gray-50 justify-center"
+                  onClick={() => {
+                    toast({
+                      title: "LINE Login",
+                      description: "LINE login is not yet implemented",
+                      variant: "destructive"
+                    });
+                  }}
+                  disabled={oauthLoginMutation.isPending || inAppBrowserInfo.detected}
+                >
+                  <svg className="mr-2 h-5 w-5 text-[#06C755]" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M22 10.6C22 5.9 17.5 2 12 2C6.5 2 2 5.9 2 10.6C2 14.9 5.6 18.5 10.4 19.5C10.8 19.6 11.4 19.8 11.5 20.1C11.6 20.4 11.5 21 11.5 21C11.5 21 11.4 21.6 11.3 21.8C11.2 22.1 10.9 22.7 12 22.1C13.1 21.5 17.8 18.5 20 16C21.5 14.3 22 12.6 22 10.6Z" />
+                  </svg>
+                  <span>Continue with LINE</span>
+                </Button>
+                <div className="text-center">
+                  <Button 
+                    variant="link" 
+                    className="text-xs text-blue-600 hover:text-blue-800"
+                  >
+                    View more
+                  </Button>
+                </div>
               </div>
               
               {process.env.NODE_ENV === 'development' && (
