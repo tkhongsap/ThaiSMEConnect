@@ -42,7 +42,6 @@ const Login: React.FC = () => {
         { keyword: 'FBAN', name: 'Facebook' },
         { keyword: 'FBAV', name: 'Facebook' },
         { keyword: 'Instagram', name: 'Instagram' },
-        { keyword: 'Line', name: 'LINE' },
         { keyword: 'KAKAOTALK', name: 'KakaoTalk' },
         { keyword: 'WhatsApp', name: 'WhatsApp' },
         { keyword: 'WeChat', name: 'WeChat' },
