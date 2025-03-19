@@ -50,31 +50,23 @@ const Footer: React.FC = () => {
                 </h3>
                 <ul className="mt-4 space-y-4">
                   <li>
-                    <Link href="/team">
-                      <a className="text-base text-gray-500 hover:text-gray-900">
-                        {t('footer.aboutUs.team')}
-                      </a>
+                    <Link href="/team" className="text-base text-gray-500 hover:text-gray-900">
+                      {t('footer.aboutUs.team')}
                     </Link>
                   </li>
                   <li>
-                    <Link href="/about">
-                      <a className="text-base text-gray-500 hover:text-gray-900">
-                        {t('footer.aboutUs.about')}
-                      </a>
+                    <Link href="/about" className="text-base text-gray-500 hover:text-gray-900">
+                      {t('footer.aboutUs.about')}
                     </Link>
                   </li>
                   <li>
-                    <Link href="/news">
-                      <a className="text-base text-gray-500 hover:text-gray-900">
-                        {t('footer.aboutUs.news')}
-                      </a>
+                    <Link href="/news" className="text-base text-gray-500 hover:text-gray-900">
+                      {t('footer.aboutUs.news')}
                     </Link>
                   </li>
                   <li>
-                    <Link href="/careers">
-                      <a className="text-base text-gray-500 hover:text-gray-900">
-                        {t('footer.aboutUs.careers')}
-                      </a>
+                    <Link href="/careers" className="text-base text-gray-500 hover:text-gray-900">
+                      {t('footer.aboutUs.careers')}
                     </Link>
                   </li>
                 </ul>
@@ -85,31 +77,23 @@ const Footer: React.FC = () => {
                 </h3>
                 <ul className="mt-4 space-y-4">
                   <li>
-                    <Link href="/help">
-                      <a className="text-base text-gray-500 hover:text-gray-900">
-                        {t('footer.support.help')}
-                      </a>
+                    <Link href="/help" className="text-base text-gray-500 hover:text-gray-900">
+                      {t('footer.support.help')}
                     </Link>
                   </li>
                   <li>
-                    <Link href="/faq">
-                      <a className="text-base text-gray-500 hover:text-gray-900">
-                        {t('footer.support.faq')}
-                      </a>
+                    <Link href="/faq" className="text-base text-gray-500 hover:text-gray-900">
+                      {t('footer.support.faq')}
                     </Link>
                   </li>
                   <li>
-                    <Link href="/contact">
-                      <a className="text-base text-gray-500 hover:text-gray-900">
-                        {t('footer.support.contact')}
-                      </a>
+                    <Link href="/contact" className="text-base text-gray-500 hover:text-gray-900">
+                      {t('footer.support.contact')}
                     </Link>
                   </li>
                   <li>
-                    <Link href="/guides">
-                      <a className="text-base text-gray-500 hover:text-gray-900">
-                        {t('footer.support.guides')}
-                      </a>
+                    <Link href="/guides" className="text-base text-gray-500 hover:text-gray-900">
+                      {t('footer.support.guides')}
                     </Link>
                   </li>
                 </ul>
@@ -122,31 +106,23 @@ const Footer: React.FC = () => {
                 </h3>
                 <ul className="mt-4 space-y-4">
                   <li>
-                    <Link href="/content-creation">
-                      <a className="text-base text-gray-500 hover:text-gray-900">
-                        {t('footer.services.contentCreation')}
-                      </a>
+                    <Link href="/content-creation" className="text-base text-gray-500 hover:text-gray-900">
+                      {t('footer.services.contentCreation')}
                     </Link>
                   </li>
                   <li>
-                    <Link href="/subdomains">
-                      <a className="text-base text-gray-500 hover:text-gray-900">
-                        {t('footer.services.subdomains')}
-                      </a>
+                    <Link href="/subdomains" className="text-base text-gray-500 hover:text-gray-900">
+                      {t('footer.services.subdomains')}
                     </Link>
                   </li>
                   <li>
-                    <Link href="/analytics">
-                      <a className="text-base text-gray-500 hover:text-gray-900">
-                        {t('footer.services.analytics')}
-                      </a>
+                    <Link href="/analytics" className="text-base text-gray-500 hover:text-gray-900">
+                      {t('footer.services.analytics')}
                     </Link>
                   </li>
                   <li>
-                    <Link href="/api">
-                      <a className="text-base text-gray-500 hover:text-gray-900">
-                        {t('footer.services.api')}
-                      </a>
+                    <Link href="/api" className="text-base text-gray-500 hover:text-gray-900">
+                      {t('footer.services.api')}
                     </Link>
                   </li>
                 </ul>
@@ -157,24 +133,18 @@ const Footer: React.FC = () => {
                 </h3>
                 <ul className="mt-4 space-y-4">
                   <li>
-                    <Link href="/privacy">
-                      <a className="text-base text-gray-500 hover:text-gray-900">
-                        {t('footer.legal.privacy')}
-                      </a>
+                    <Link href="/privacy" className="text-base text-gray-500 hover:text-gray-900">
+                      {t('footer.legal.privacy')}
                     </Link>
                   </li>
                   <li>
-                    <Link href="/terms">
-                      <a className="text-base text-gray-500 hover:text-gray-900">
-                        {t('footer.legal.terms')}
-                      </a>
+                    <Link href="/terms" className="text-base text-gray-500 hover:text-gray-900">
+                      {t('footer.legal.terms')}
                     </Link>
                   </li>
                   <li>
-                    <Link href="/cookies">
-                      <a className="text-base text-gray-500 hover:text-gray-900">
-                        {t('footer.legal.cookies')}
-                      </a>
+                    <Link href="/cookies" className="text-base text-gray-500 hover:text-gray-900">
+                      {t('footer.legal.cookies')}
                     </Link>
                   </li>
                 </ul>
