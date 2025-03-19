@@ -9,7 +9,7 @@ import Footer from "@/components/Footer";
 import Home from "@/pages/Home";
 import NotFound from "@/pages/not-found";
 import Login from "@/pages/Login";
-import Register from "@/pages/Register";
+import RegisterRedirect from "@/components/RegisterRedirect";
 import Dashboard from "@/pages/Dashboard";
 import ContentGenerator from "@/pages/ContentGenerator";
 import './i18n';
@@ -29,7 +29,7 @@ function Router() {
         <Switch>
           <Route path="/" component={Home} />
           <Route path="/login" component={Login} />
-          <Route path="/register" component={Register} />
+          <Route path="/register" component={RegisterRedirect} />
           <Route path="/dashboard" component={Dashboard} />
           <Route path="/content-generator" component={ContentGenerator} />
           <Route component={NotFound} />

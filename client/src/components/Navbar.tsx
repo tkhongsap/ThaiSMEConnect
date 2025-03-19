@@ -107,13 +107,8 @@ const Navbar: React.FC = () => {
               ) : (
                 <>
                   <Link href="/login">
-                    <a className="text-gray-500 hover:text-gray-700 px-3 py-2 rounded-md text-sm font-medium">
-                      {t('nav.login')}
-                    </a>
-                  </Link>
-                  <Link href="/register">
                     <a className="bg-primary hover:bg-blue-600 text-white px-4 py-2 rounded-lg text-sm font-medium transition duration-150 ease-in-out">
-                      {t('nav.signup')}
+                      {t('nav.login')}
                     </a>
                   </Link>
                 </>
@@ -188,13 +183,8 @@ const Navbar: React.FC = () => {
             ) : (
               <>
                 <Link href="/login">
-                  <a className="block pl-3 pr-4 py-2 border-l-4 border-transparent text-base font-medium text-gray-500 hover:text-gray-700 hover:bg-gray-50 hover:border-gray-300">
-                    {t('nav.login')}
-                  </a>
-                </Link>
-                <Link href="/register">
                   <a className="block pl-3 pr-4 py-2 border-l-4 border-primary text-primary text-base font-medium bg-gray-50">
-                    {t('nav.signup')}
+                    {t('nav.login')}
                   </a>
                 </Link>
               </>
