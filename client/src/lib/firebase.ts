@@ -173,20 +173,70 @@ export async function signInWithFacebook(): Promise<OAuthUser> {
 }
 
 /**
+ * Sign in with LINE
+ * @returns User data for backend authentication
+ */
+export async function signInWithLINE(): Promise<OAuthUser> {
+  try {
+    // Check if the Firebase API key and LINE channel ID are configured
+    if (!import.meta.env.VITE_FIREBASE_API_KEY || 
+        !import.meta.env.VITE_FIREBASE_AUTH_DOMAIN ||
+        !import.meta.env.VITE_LINE_LOGIN_CHANNEL_ID) {
+      throw new Error("Firebase or LINE configuration missing. Please configure the necessary environment variables.");
+    }
+    
+    // Check for in-app browsers
+    const browserInfo = detectInAppBrowser();
+    if (browserInfo.isInApp) {
+      console.warn(`Detected ${browserInfo.browserName} in-app browser which may not support LINE authentication`);
+      
+      const appName = browserInfo.browserName || "social media app";
+      const url = getExternalBrowserUrl();
+      
+      throw new Error(
+        `LINE Sign-In may not work properly in the ${appName} browser due to security policies. ` +
+        `Please copy this URL and open it in Chrome or Safari: ${url}`
+      );
+    }
+    
+    const result = await signInWithPopup(auth, lineProvider);
+    return transformFirebaseUserToOAuthUser(result, "line");
+  } catch (error) {
+    console.error("Error signing in with LINE", error);
+    
+    // Enhance error messages for common Firebase auth issues
+    if (error instanceof Error) {
+      if (error.message.includes('auth/configuration-not-found')) {
+        console.error("LINE Sign-In is not properly configured in Firebase console");
+        throw new Error("LINE Sign-In is not properly configured in Firebase console. Please enable LINE as an authentication provider in Firebase.");
+      }
+      
+      if (error.message.includes('auth/unauthorized-domain')) {
+        console.error("Domain not authorized for LINE Sign-In");
+        throw new Error("This domain is not authorized for LINE Sign-In. Please add it to authorized domains in Firebase console.");
+      }
+    }
+    
+    throw error;
+  }
+}
+
+/**
  * Transform Firebase user credential to our OAuthUser format
  */
 function transformFirebaseUserToOAuthUser(
   credential: UserCredential, 
-  provider: "google" | "facebook"
+  provider: "google" | "facebook" | "line"
 ): OAuthUser {
   const { user } = credential;
   
-  if (!user.email) {
+  // LINE may not always provide an email, so we need to handle that case
+  if (!user.email && provider !== "line") {
     throw new Error("Email is required for authentication");
   }
   
   return {
-    email: user.email,
+    email: user.email || `${user.uid}@line.user.com`, // Fallback email for LINE users
     displayName: user.displayName || undefined,
     authProvider: provider,
     providerId: user.uid,

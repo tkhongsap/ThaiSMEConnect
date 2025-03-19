@@ -52,7 +52,7 @@ export const loginUserSchema = z.object({
 export const oauthUserSchema = z.object({
   email: z.string().email("Invalid email address"),
   displayName: z.string().optional(),
-  authProvider: z.enum(["google", "facebook"]),
+  authProvider: z.enum(["google", "facebook", "line"]),
   providerId: z.string(),
   photoURL: z.string().optional(),
 });

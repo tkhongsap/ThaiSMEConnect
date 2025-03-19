@@ -8,7 +8,7 @@ import { apiRequest } from '@/lib/queryClient';
 import { LoginUser, loginUserSchema } from '@shared/schema';
 import { Link } from 'wouter';
 import { useToast } from '@/hooks/use-toast';
-import { signInWithGoogle, signInWithFacebook, getExternalBrowserUrl } from '@/lib/firebase';
+import { signInWithGoogle, signInWithFacebook, signInWithLINE, getExternalBrowserUrl } from '@/lib/firebase';
 import {
   Form,
   FormControl,
@@ -219,6 +219,36 @@ const Login: React.FC = () => {
     }
   }
   
+  // Handle LINE sign-in
+  async function handleLINESignIn() {
+    try {
+      const lineUser = await signInWithLINE();
+      oauthLoginMutation.mutate(lineUser);
+    } catch (error) {
+      console.error("LINE sign-in error:", error);
+      
+      // Handle specific Firebase errors
+      let errorMessage = '';
+      if (error instanceof Error) {
+        if (error.message.includes('auth/configuration-not-found')) {
+          errorMessage = 'LINE sign-in is not properly configured in Firebase. Please contact the administrator.';
+        } else if (error.message.includes('VITE_LINE_LOGIN_CHANNEL_ID')) {
+          errorMessage = 'LINE login is not configured. Please set up LINE login credentials.';
+        } else {
+          errorMessage = error.message;
+        }
+      } else {
+        errorMessage = "LINE sign-in failed. Please try again.";
+      }
+      
+      toast({
+        title: t('login.errorTitle'),
+        description: errorMessage,
+        variant: 'destructive',
+      });
+    }
+  }
+  
   // Handle test account login
   function handleTestLogin() {
     testLoginMutation.mutate();
@@ -367,13 +397,7 @@ const Login: React.FC = () => {
                 <Button
                   variant="outline"
                   className="w-full border-gray-300 hover:bg-gray-50 justify-center"
-                  onClick={() => {
-                    toast({
-                      title: "LINE Login",
-                      description: "LINE login is not yet implemented",
-                      variant: "destructive"
-                    });
-                  }}
+                  onClick={handleLINESignIn}
                   disabled={oauthLoginMutation.isPending || inAppBrowserInfo.detected}
                 >
                   <svg className="mr-2 h-5 w-5 text-[#06C755]" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
