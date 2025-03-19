@@ -31,13 +31,9 @@ googleProvider.setCustomParameters({ prompt: 'select_account' });
 // Facebook Provider
 const facebookProvider = new FacebookAuthProvider();
 
-// LINE Provider
-const lineProvider = new OAuthProvider('oidc.line');
-lineProvider.setCustomParameters({
-  prompt: 'consent',
-  // The LINE login channel ID needs to be set in Firebase Auth providers
-  client_id: import.meta.env.VITE_LINE_LOGIN_CHANNEL_ID
-});
+// NOTE: LINE login is not directly supported in Firebase Authentication
+// We will use a direct LINE OAuth approach instead of using Firebase's OAuthProvider
+// This won't be fully implemented in this file - see the handleLINESignIn function in Login.tsx
 
 /**
  * Sign in with Google
@@ -173,19 +169,21 @@ export async function signInWithFacebook(): Promise<OAuthUser> {
 }
 
 /**
- * Sign in with LINE
+ * Sign in with LINE using a direct LINE OAuth approach
+ * 
+ * NOTE: Since Firebase doesn't directly support LINE login as a provider,
+ * we need to use LINE's direct OAuth flow with our server as the callback endpoint
+ * 
  * @returns User data for backend authentication
  */
 export async function signInWithLINE(): Promise<OAuthUser> {
   try {
-    // Check if the Firebase API key and LINE channel ID are configured
-    if (!import.meta.env.VITE_FIREBASE_API_KEY || 
-        !import.meta.env.VITE_FIREBASE_AUTH_DOMAIN ||
-        !import.meta.env.VITE_LINE_LOGIN_CHANNEL_ID) {
-      throw new Error("Firebase or LINE configuration missing. Please configure the necessary environment variables.");
+    // Check if LINE channel ID is configured
+    if (!import.meta.env.VITE_LINE_LOGIN_CHANNEL_ID) {
+      throw new Error("LINE login configuration missing. Please set the VITE_LINE_LOGIN_CHANNEL_ID environment variable.");
     }
     
-    // Check for in-app browsers
+    // Check for in-app browsers 
     const browserInfo = detectInAppBrowser();
     if (browserInfo.isInApp) {
       console.warn(`Detected ${browserInfo.browserName} in-app browser which may not support LINE authentication`);
@@ -199,30 +197,29 @@ export async function signInWithLINE(): Promise<OAuthUser> {
       );
     }
     
-    const result = await signInWithPopup(auth, lineProvider);
-    return transformFirebaseUserToOAuthUser(result, "line");
+    // For now, show a clear error explaining the situation
+    throw new Error(
+      "LINE login is not directly supported in Firebase Authentication. " +
+      "To implement LINE login, you would need to create a custom LINE OAuth flow with your own server endpoints. " +
+      "This requires additional backend setup with LINE Developer Console."
+    );
+    
+    // A proper implementation would:
+    // 1. Redirect to LINE OAuth authorization URL 
+    // 2. Handle the callback on your server
+    // 3. Exchange the authorization code for an access token
+    // 4. Get user profile information from LINE
+    // 5. Create or update the user in your database
+    // 6. Return the user data in OAuthUser format
   } catch (error) {
     console.error("Error signing in with LINE", error);
     
-    // Enhance error messages for common Firebase auth issues
     if (error instanceof Error) {
-      if (error.message.includes('auth/configuration-not-found')) {
-        console.error("LINE Sign-In is not properly configured in Firebase console");
-        throw new Error("LINE Sign-In is not properly configured in Firebase console. Please enable LINE as an authentication provider in Firebase.");
-      }
-      
-      if (error.message.includes('auth/unauthorized-domain')) {
-        console.error("Domain not authorized for LINE Sign-In");
-        throw new Error("This domain is not authorized for LINE Sign-In. Please add it to authorized domains in Firebase console.");
-      }
-      
-      if (error.message.includes('auth/operation-not-allowed')) {
-        console.error("LINE Sign-In is not enabled in Firebase console");
-        throw new Error("LINE Sign-In is not enabled in Firebase Authentication console. Please enable LINE as an authentication provider in your Firebase project.");
-      }
+      // Pass through our custom errors
+      throw error;
     }
     
-    throw error;
+    throw new Error("LINE login failed. Please try another sign-in method.");
   }
 }
 

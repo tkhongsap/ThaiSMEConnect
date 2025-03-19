@@ -422,14 +422,13 @@ const Login: React.FC = () => {
                   </svg>
                   <span>Continue with LINE</span>
                   
-                  {/* Tooltip only shown in development mode for LINE setup info */}
-                  {process.env.NODE_ENV === 'development' && (
-                    <span className="absolute opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-gray-800 text-white text-xs rounded py-1 px-2 -top-16 left-1/2 transform -translate-x-1/2 w-64 text-center">
-                      <p className="mb-1">LINE login requires Firebase Authentication setup:</p>
-                      <p>Enable LINE provider in Firebase console → Authentication → Sign-in methods</p>
-                      <div className="absolute w-2 h-2 bg-gray-800 rotate-45 -bottom-1 left-1/2 transform -translate-x-1/2"></div>
-                    </span>
-                  )}
+                  {/* Tooltip with LINE OAuth setup information */}
+                  <span className="absolute opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-gray-800 text-white text-xs rounded py-1 px-2 -top-20 left-1/2 transform -translate-x-1/2 w-72 text-center z-50">
+                    <p className="mb-1 font-semibold">LINE login implementation note:</p>
+                    <p className="mb-1">LINE is not available in Firebase Authentication providers.</p> 
+                    <p>This requires a custom LINE OAuth implementation with server endpoints.</p>
+                    <div className="absolute w-2 h-2 bg-gray-800 rotate-45 -bottom-1 left-1/2 transform -translate-x-1/2"></div>
+                  </span>
                 </Button>
                 <div className="text-center">
                   <Button 
