@@ -31,9 +31,7 @@ googleProvider.setCustomParameters({ prompt: 'select_account' });
 // Facebook Provider
 const facebookProvider = new FacebookAuthProvider();
 
-// NOTE: LINE login is not directly supported in Firebase Authentication
-// We will use a direct LINE OAuth approach instead of using Firebase's OAuthProvider
-// This won't be fully implemented in this file - see the handleLINESignIn function in Login.tsx
+// NOTE: LINE login has been removed to simplify the MVP
 
 /**
  * Sign in with Google
@@ -168,77 +166,24 @@ export async function signInWithFacebook(): Promise<OAuthUser> {
   }
 }
 
-/**
- * Sign in with LINE using a direct LINE OAuth approach
- * 
- * NOTE: Since Firebase doesn't directly support LINE login as a provider,
- * we need to use LINE's direct OAuth flow with our server as the callback endpoint
- * 
- * @returns User data for backend authentication
- */
-export async function signInWithLINE(): Promise<OAuthUser> {
-  try {
-    // Check if LINE channel ID is configured
-    if (!import.meta.env.VITE_LINE_LOGIN_CHANNEL_ID) {
-      throw new Error("LINE login configuration missing. Please set the VITE_LINE_LOGIN_CHANNEL_ID environment variable.");
-    }
-    
-    // Check for in-app browsers 
-    const browserInfo = detectInAppBrowser();
-    if (browserInfo.isInApp) {
-      console.warn(`Detected ${browserInfo.browserName} in-app browser which may not support LINE authentication`);
-      
-      const appName = browserInfo.browserName || "social media app";
-      const url = getExternalBrowserUrl();
-      
-      throw new Error(
-        `LINE Sign-In may not work properly in the ${appName} browser due to security policies. ` +
-        `Please copy this URL and open it in Chrome or Safari: ${url}`
-      );
-    }
-    
-    // For now, show a clear error explaining the situation
-    throw new Error(
-      "LINE login is not directly supported in Firebase Authentication. " +
-      "To implement LINE login, you would need to create a custom LINE OAuth flow with your own server endpoints. " +
-      "This requires additional backend setup with LINE Developer Console."
-    );
-    
-    // A proper implementation would:
-    // 1. Redirect to LINE OAuth authorization URL 
-    // 2. Handle the callback on your server
-    // 3. Exchange the authorization code for an access token
-    // 4. Get user profile information from LINE
-    // 5. Create or update the user in your database
-    // 6. Return the user data in OAuthUser format
-  } catch (error) {
-    console.error("Error signing in with LINE", error);
-    
-    if (error instanceof Error) {
-      // Pass through our custom errors
-      throw error;
-    }
-    
-    throw new Error("LINE login failed. Please try another sign-in method.");
-  }
-}
+// LINE login has been removed to simplify the MVP
 
 /**
  * Transform Firebase user credential to our OAuthUser format
  */
 function transformFirebaseUserToOAuthUser(
   credential: UserCredential, 
-  provider: "google" | "facebook" | "line"
+  provider: "google" | "facebook"
 ): OAuthUser {
   const { user } = credential;
   
-  // LINE may not always provide an email, so we need to handle that case
-  if (!user.email && provider !== "line") {
+  // Email is required for all supported providers
+  if (!user.email) {
     throw new Error("Email is required for authentication");
   }
   
   return {
-    email: user.email || `${user.uid}@line.user.com`, // Fallback email for LINE users
+    email: user.email,
     displayName: user.displayName || undefined,
     authProvider: provider,
     providerId: user.uid,

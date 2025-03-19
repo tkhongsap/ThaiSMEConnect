@@ -7,7 +7,7 @@ import { useMutation } from '@tanstack/react-query';
 import { apiRequest } from '@/lib/queryClient';
 import { LoginUser, loginUserSchema } from '@shared/schema';
 import { useToast } from '@/hooks/use-toast';
-import { signInWithGoogle, signInWithFacebook, signInWithLINE, getExternalBrowserUrl } from '@/lib/firebase';
+import { signInWithGoogle, signInWithFacebook, getExternalBrowserUrl } from '@/lib/firebase';
 import {
   Form,
   FormControl,
@@ -218,41 +218,7 @@ const Login: React.FC = () => {
     }
   }
   
-  // Handle LINE sign-in
-  async function handleLINESignIn() {
-    try {
-      const lineUser = await signInWithLINE();
-      oauthLoginMutation.mutate(lineUser);
-    } catch (error) {
-      console.error("LINE sign-in error:", error);
-      
-      // Handle specific Firebase errors
-      let errorMessage = '';
-      let errorDetails = '';
-      
-      if (error instanceof Error) {
-        if (error.message.includes('auth/configuration-not-found')) {
-          errorMessage = 'LINE sign-in is not properly configured in Firebase. Please contact the administrator.';
-        } else if (error.message.includes('auth/operation-not-allowed')) {
-          errorMessage = 'LINE login is not enabled in Firebase Authentication.';
-          errorDetails = 'This provider needs to be enabled in the Firebase console under Authentication > Sign-in method.';
-        } else if (error.message.includes('VITE_LINE_LOGIN_CHANNEL_ID')) {
-          errorMessage = 'LINE login is not configured. Please set up LINE login credentials.';
-        } else {
-          errorMessage = error.message;
-        }
-      } else {
-        errorMessage = "LINE sign-in failed. Please try again.";
-      }
-      
-      // Show more detailed toast for better user experience
-      toast({
-        title: t('login.errorTitle'),
-        description: errorDetails ? `${errorMessage} ${errorDetails}` : errorMessage,
-        variant: 'destructive',
-      });
-    }
-  }
+  // LINE login has been removed to simplify the MVP
   
   // Handle test account login
   function handleTestLogin() {
@@ -411,33 +377,8 @@ const Login: React.FC = () => {
                   <FaFacebook className="mr-2 h-5 w-5 text-[#1877F2]" />
                   <span>Continue with Facebook</span>
                 </Button>
-                <Button
-                  variant="outline"
-                  className="w-full border-gray-300 hover:bg-gray-50 justify-center group relative"
-                  onClick={handleLINESignIn}
-                  disabled={oauthLoginMutation.isPending || inAppBrowserInfo.detected}
-                >
-                  <svg className="mr-2 h-5 w-5 text-[#06C755]" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M22 10.6C22 5.9 17.5 2 12 2C6.5 2 2 5.9 2 10.6C2 14.9 5.6 18.5 10.4 19.5C10.8 19.6 11.4 19.8 11.5 20.1C11.6 20.4 11.5 21 11.5 21C11.5 21 11.4 21.6 11.3 21.8C11.2 22.1 10.9 22.7 12 22.1C13.1 21.5 17.8 18.5 20 16C21.5 14.3 22 12.6 22 10.6Z" />
-                  </svg>
-                  <span>Continue with LINE</span>
-                  
-                  {/* Tooltip with LINE OAuth setup information */}
-                  <span className="absolute opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-gray-800 text-white text-xs rounded py-1 px-2 -top-20 left-1/2 transform -translate-x-1/2 w-72 text-center z-50">
-                    <p className="mb-1 font-semibold">LINE login implementation note:</p>
-                    <p className="mb-1">LINE is not available in Firebase Authentication providers.</p> 
-                    <p>This requires a custom LINE OAuth implementation with server endpoints.</p>
-                    <div className="absolute w-2 h-2 bg-gray-800 rotate-45 -bottom-1 left-1/2 transform -translate-x-1/2"></div>
-                  </span>
-                </Button>
-                <div className="text-center">
-                  <Button 
-                    variant="link" 
-                    className="text-xs text-blue-600 hover:text-blue-800"
-                  >
-                    View more
-                  </Button>
-                </div>
+                {/* LINE login button removed to simplify the MVP */}
+                {/* "View more" button removed as we only have two providers now */}
               </div>
               
               {process.env.NODE_ENV === 'development' && (
