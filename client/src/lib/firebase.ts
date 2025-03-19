@@ -215,6 +215,11 @@ export async function signInWithLINE(): Promise<OAuthUser> {
         console.error("Domain not authorized for LINE Sign-In");
         throw new Error("This domain is not authorized for LINE Sign-In. Please add it to authorized domains in Firebase console.");
       }
+      
+      if (error.message.includes('auth/operation-not-allowed')) {
+        console.error("LINE Sign-In is not enabled in Firebase console");
+        throw new Error("LINE Sign-In is not enabled in Firebase Authentication console. Please enable LINE as an authentication provider in your Firebase project.");
+      }
     }
     
     throw error;
