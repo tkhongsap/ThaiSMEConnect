@@ -41,31 +41,21 @@ const Navbar: React.FC = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-16">
           <div className="flex items-center">
-            <Link href="/">
-              <a className="flex-shrink-0 flex items-center">
-                <span className="text-primary text-2xl font-bold">AI Content Pro</span>
-              </a>
+            <Link href="/" className="flex-shrink-0 flex items-center">
+              <span className="text-primary text-2xl font-bold">AI Content Pro</span>
             </Link>
             <div className="hidden sm:ml-6 sm:flex sm:space-x-8">
-              <Link href="/">
-                <a className={`${isActive('/') ? 'border-primary text-primary' : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'} inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium`}>
-                  {t('nav.home')}
-                </a>
+              <Link href="/" className={`${isActive('/') ? 'border-primary text-primary' : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'} inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium`}>
+                {t('nav.home')}
               </Link>
-              <Link href="/features">
-                <a className={`${isActive('/features') ? 'border-primary text-primary' : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'} inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium`}>
-                  {t('nav.features')}
-                </a>
+              <Link href="/features" className={`${isActive('/features') ? 'border-primary text-primary' : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'} inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium`}>
+                {t('nav.features')}
               </Link>
-              <Link href="/pricing">
-                <a className={`${isActive('/pricing') ? 'border-primary text-primary' : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'} inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium`}>
-                  {t('nav.pricing')}
-                </a>
+              <Link href="/pricing" className={`${isActive('/pricing') ? 'border-primary text-primary' : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'} inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium`}>
+                {t('nav.pricing')}
               </Link>
-              <Link href="/examples">
-                <a className={`${isActive('/examples') ? 'border-primary text-primary' : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'} inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium`}>
-                  {t('nav.examples')}
-                </a>
+              <Link href="/examples" className={`${isActive('/examples') ? 'border-primary text-primary' : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'} inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium`}>
+                {t('nav.examples')}
               </Link>
             </div>
           </div>
@@ -75,10 +65,8 @@ const Navbar: React.FC = () => {
             <div className="hidden sm:flex sm:items-center sm:space-x-2">
               {!isLoading && user ? (
                 <div className="flex items-center space-x-2">
-                  <Link href="/dashboard">
-                    <a className="text-gray-500 hover:text-gray-700 px-3 py-2 rounded-md text-sm font-medium">
-                      {t('nav.dashboard')}
-                    </a>
+                  <Link href="/dashboard" className="text-gray-500 hover:text-gray-700 px-3 py-2 rounded-md text-sm font-medium">
+                    {t('nav.dashboard')}
                   </Link>
                   <DropdownMenu>
                     <DropdownMenuTrigger asChild>
@@ -106,10 +94,8 @@ const Navbar: React.FC = () => {
                 </div>
               ) : (
                 <>
-                  <Link href="/login">
-                    <a className="bg-primary hover:bg-blue-600 text-white px-4 py-2 rounded-lg text-sm font-medium transition duration-150 ease-in-out">
-                      {t('nav.login')}
-                    </a>
+                  <Link href="/login" className="bg-primary hover:bg-blue-600 text-white px-4 py-2 rounded-lg text-sm font-medium transition duration-150 ease-in-out">
+                    {t('nav.login')}
                   </Link>
                 </>
               )}
@@ -140,38 +126,26 @@ const Navbar: React.FC = () => {
       {/* Mobile menu */}
       <div className={`sm:hidden ${mobileMenuOpen ? 'block' : 'hidden'}`}>
         <div className="pt-2 pb-3 space-y-1">
-          <Link href="/">
-            <a className={`${isActive('/') ? 'bg-gray-50 border-primary text-primary' : 'border-transparent text-gray-500 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700'} block pl-3 pr-4 py-2 border-l-4 text-base font-medium`}>
-              {t('nav.home')}
-            </a>
+          <Link href="/" className={`${isActive('/') ? 'bg-gray-50 border-primary text-primary' : 'border-transparent text-gray-500 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700'} block pl-3 pr-4 py-2 border-l-4 text-base font-medium`}>
+            {t('nav.home')}
           </Link>
-          <Link href="/features">
-            <a className={`${isActive('/features') ? 'bg-gray-50 border-primary text-primary' : 'border-transparent text-gray-500 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700'} block pl-3 pr-4 py-2 border-l-4 text-base font-medium`}>
-              {t('nav.features')}
-            </a>
+          <Link href="/features" className={`${isActive('/features') ? 'bg-gray-50 border-primary text-primary' : 'border-transparent text-gray-500 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700'} block pl-3 pr-4 py-2 border-l-4 text-base font-medium`}>
+            {t('nav.features')}
           </Link>
-          <Link href="/pricing">
-            <a className={`${isActive('/pricing') ? 'bg-gray-50 border-primary text-primary' : 'border-transparent text-gray-500 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700'} block pl-3 pr-4 py-2 border-l-4 text-base font-medium`}>
-              {t('nav.pricing')}
-            </a>
+          <Link href="/pricing" className={`${isActive('/pricing') ? 'bg-gray-50 border-primary text-primary' : 'border-transparent text-gray-500 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700'} block pl-3 pr-4 py-2 border-l-4 text-base font-medium`}>
+            {t('nav.pricing')}
           </Link>
-          <Link href="/examples">
-            <a className={`${isActive('/examples') ? 'bg-gray-50 border-primary text-primary' : 'border-transparent text-gray-500 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700'} block pl-3 pr-4 py-2 border-l-4 text-base font-medium`}>
-              {t('nav.examples')}
-            </a>
+          <Link href="/examples" className={`${isActive('/examples') ? 'bg-gray-50 border-primary text-primary' : 'border-transparent text-gray-500 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700'} block pl-3 pr-4 py-2 border-l-4 text-base font-medium`}>
+            {t('nav.examples')}
           </Link>
           <div className="pt-4 pb-3 border-t border-gray-200">
             {!isLoading && user ? (
               <>
-                <Link href="/dashboard">
-                  <a className="block pl-3 pr-4 py-2 border-l-4 border-transparent text-base font-medium text-gray-500 hover:text-gray-700 hover:bg-gray-50 hover:border-gray-300">
-                    {t('nav.dashboard')}
-                  </a>
+                <Link href="/dashboard" className="block pl-3 pr-4 py-2 border-l-4 border-transparent text-base font-medium text-gray-500 hover:text-gray-700 hover:bg-gray-50 hover:border-gray-300">
+                  {t('nav.dashboard')}
                 </Link>
-                <Link href="/content-generator">
-                  <a className="block pl-3 pr-4 py-2 border-l-4 border-transparent text-base font-medium text-gray-500 hover:text-gray-700 hover:bg-gray-50 hover:border-gray-300">
-                    {t('nav.contentGenerator')}
-                  </a>
+                <Link href="/content-generator" className="block pl-3 pr-4 py-2 border-l-4 border-transparent text-base font-medium text-gray-500 hover:text-gray-700 hover:bg-gray-50 hover:border-gray-300">
+                  {t('nav.contentGenerator')}
                 </Link>
                 <button 
                   onClick={handleLogout}
@@ -182,10 +156,8 @@ const Navbar: React.FC = () => {
               </>
             ) : (
               <>
-                <Link href="/login">
-                  <a className="block pl-3 pr-4 py-2 border-l-4 border-primary text-primary text-base font-medium bg-gray-50">
-                    {t('nav.login')}
-                  </a>
+                <Link href="/login" className="block pl-3 pr-4 py-2 border-l-4 border-primary text-primary text-base font-medium bg-gray-50">
+                  {t('nav.login')}
                 </Link>
               </>
             )}
